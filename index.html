@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevLab — Ingénierie technologique &amp; R&amp;D appliquée</title>
+<meta name="description" content="DevLab est une structure camerounaise d'ingénierie technologique et de recherche appliquée : intelligence artificielle, data engineering, software engineering, architecture numérique et venture building.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e11;
+    --panel:#11151a;
+    --panel-2:#151a20;
+    --border:#232b33;
+    --text:#e9edf0;
+    --muted:#8b96a0;
+    --teal:#2fd3c7;
+    --teal-dim:#1f8f87;
+    --amber:#e2a63b;
+    --max:900px;
+    --max-wide:1120px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--teal); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--teal); outline-offset:3px; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
+  .wrap-wide{ max-width:var(--max-wide); margin:0 auto; padding:0 24px; }
+
+  /* Nav */
+  nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(11,14,17,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    max-width:var(--max-wide); margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .nav-brand{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.1rem;
+    color:var(--text); text-decoration:none; letter-spacing:-0.01em;
+  }
+  .nav-links{ display:flex; gap:26px; flex-wrap:wrap; }
+  .nav-links a{ color:var(--muted); text-decoration:none; font-size:0.92rem; }
+  .nav-links a:hover{ color:var(--text); }
+
+  /* Hero */
+  header.hero{ padding:88px 0 64px; border-bottom:1px solid var(--border); }
+  .hero-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--teal);
+    margin:0 0 22px; display:flex; align-items:center; gap:10px;
+  }
+  .hero-tag .dot{ width:6px; height:6px; border-radius:50%; background:var(--teal); display:inline-block; }
+  h1.title{
+    font-family:'Space Grotesk', sans-serif; font-weight:600;
+    font-size:clamp(2.3rem, 6vw, 3.6rem); line-height:1.08; letter-spacing:-0.01em;
+    margin:0 0 26px; color:var(--text); max-width:760px;
+    opacity:0; transform:translateY(12px); animation:rise 0.6s ease-out 0.08s forwards;
+  }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+  p.lede{ font-size:1.14rem; color:var(--muted); max-width:600px; margin:0 0 40px; }
+  .hero-domains{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .hero-domains span{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--muted);
+    border:1px solid var(--border); padding:6px 12px; border-radius:3px;
+  }
+
+  /* Sections generic */
+  section{ padding:72px 0; border-bottom:1px solid var(--border); }
+  .section-head{ margin-bottom:44px; max-width:640px; }
+  .section-num{
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--teal); margin:0 0 10px;
+  }
+  h2.section-title{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.9rem;
+    margin:0 0 12px; color:var(--text); letter-spacing:-0.005em;
+  }
+  p.section-lede{ color:var(--muted); font-size:1.02rem; margin:0; }
+
+  /* Positioning: not-agency */
+  .not-list{ display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--border); }
+  @media (max-width:640px){ .not-list{ grid-template-columns:1fr; } }
+  .not-col{ padding:28px 0; }
+  .not-col:first-child{ border-right:1px solid var(--border); padding-right:32px; }
+  .not-col:last-child{ padding-left:32px; }
+  @media (max-width:640px){
+    .not-col:first-child{ border-right:none; border-bottom:1px solid var(--border); padding-right:0; }
+    .not-col:last-child{ padding-left:0; }
+  }
+  .not-col h3{
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; font-weight:500;
+    margin:0 0 16px; color:var(--muted);
+  }
+  .not-col.is-yes h3{ color:var(--teal); }
+  .not-col ul{ list-style:none; margin:0; padding:0; }
+  .not-col li{
+    padding:10px 0; border-top:1px solid var(--border); font-size:0.98rem; color:var(--text);
+  }
+  .not-col li:first-child{ border-top:none; }
+  .not-col.is-no li{ color:var(--muted); text-decoration:line-through; text-decoration-color:#3a4148; }
+
+  /* Domains grid */
+  .domain-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); }
+  @media (max-width:720px){ .domain-grid{ grid-template-columns:1fr; } }
+  .domain-card{ background:var(--bg); padding:30px 28px; }
+  .domain-card .idx{ font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--teal); margin-bottom:14px; display:block; }
+  .domain-card h3{ font-family:'Space Grotesk', sans-serif; font-size:1.18rem; font-weight:600; margin:0 0 12px; color:var(--text); }
+  .domain-card ul{ list-style:none; margin:0; padding:0; }
+  .domain-card li{
+    font-size:0.9rem; color:var(--muted); padding:5px 0 5px 16px; position:relative;
+  }
+  .domain-card li::before{
+    content:""; position:absolute; left:0; top:13px; width:6px; height:1px; background:var(--teal-dim);
+  }
+
+  /* Models */
+  .model-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:720px){ .model-grid{ grid-template-columns:1fr; } }
+  .model-card{ background:var(--panel); border:1px solid var(--border); padding:32px; border-radius:3px; }
+  .model-card .model-tag{ font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--amber); margin:0 0 14px; }
+  .model-card h3{ font-family:'Space Grotesk', sans-serif; font-size:1.3rem; margin:0 0 14px; color:var(--text); }
+  .model-card p{ color:var(--muted); font-size:0.96rem; margin:0; }
+  .model-card .flow{ margin-top:18px; font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--teal); line-height:1.9; }
+
+  /* Portfolio */
+  .proj-list{ border-top:1px solid var(--border); }
+  .proj-row{
+    display:grid; grid-template-columns:200px 1fr auto; gap:24px; align-items:start;
+    padding:28px 0; border-bottom:1px solid var(--border);
+  }
+  @media (max-width:720px){ .proj-row{ grid-template-columns:1fr; gap:10px; } }
+  .proj-name{ font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.12rem; color:var(--text); }
+  .proj-tag{ font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--teal); display:block; margin-top:6px; }
+  .proj-desc{ color:var(--muted); font-size:0.94rem; max-width:520px; }
+  .proj-link{ font-size:0.88rem; text-decoration:none; color:var(--teal); border-bottom:1px solid var(--teal-dim); white-space:nowrap; align-self:start; }
+  .proj-link:hover{ color:var(--amber); border-color:var(--amber); }
+  .proj-link.disabled{ color:var(--muted); border-color:transparent; pointer-events:none; }
+
+  /* Manifesto */
+  .manifesto{ max-width:680px; }
+  .manifesto p{ font-size:1.08rem; color:var(--text); margin:0 0 20px; }
+  .manifesto p.muted{ color:var(--muted); font-size:0.96rem; }
+  blockquote.pull{
+    font-family:'Space Grotesk', sans-serif; font-weight:500; font-size:1.5rem;
+    color:var(--teal); border-left:2px solid var(--teal); padding-left:24px;
+    margin:36px 0; line-height:1.35;
+  }
+
+  /* Contact */
+  .contact-grid{ display:flex; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+  .contact-block h3{ font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--muted); margin:0 0 10px; font-weight:400; }
+  .contact-block a, .contact-block span{ font-size:1.05rem; color:var(--text); text-decoration:none; }
+  .contact-block a:hover{ color:var(--teal); }
+
+  footer{ padding:40px 0 56px; color:var(--muted); font-size:0.86rem; }
+  footer .wrap{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  footer a{ color:var(--muted); }
+  footer a:hover{ color:var(--teal); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">DevLab</a>
+    <div class="nav-links">
+      <a href="#positionnement">Positionnement</a>
+      <a href="#domaines">Domaines</a>
+      <a href="#modele">Modèle</a>
+      <a href="#laboratoire">Laboratoire</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap-wide">
+    <p class="hero-tag"><span class="dot"></span>Cameroun — structure indépendante en formation</p>
+    <h1 class="title">Une structure d'ingénierie technologique et de recherche appliquée.</h1>
+    <p class="lede">DevLab étudie des problèmes techniques réels, conçoit des architectures numériques, développe des logiciels et des modèles d'intelligence artificielle, et déploie des systèmes qui fonctionnent — pas des sites vitrines.</p>
+    <div class="hero-domains">
+      <span>IA &amp; Machine Learning</span>
+      <span>Data Engineering</span>
+      <span>Software Engineering</span>
+      <span>Architecture numérique</span>
+      <span>R&amp;D appliquée</span>
+      <span>Venture Building</span>
+    </div>
+  </div>
+</header>
+
+<section id="positionnement">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="section-num">01</p>
+      <h2 class="section-title">Ce que nous construisons</h2>
+      <p class="section-lede">DevLab n'est pas une agence web. La distinction n'est pas cosmétique : elle définit tout ce que nous acceptons de faire, et comment.</p>
+    </div>
+    <div class="not-list">
+      <div class="not-col is-no">
+        <h3>Ce n'est pas notre métier</h3>
+        <ul>
+          <li>Livrer un site vitrine et passer au client suivant</li>
+          <li>Assembler un thème existant</li>
+          <li>S'arrêter à la livraison sans comprendre le problème métier</li>
+        </ul>
+      </div>
+      <div class="not-col is-yes">
+        <h3>Ce que nous faisons</h3>
+        <ul>
+          <li>Analyser un problème technique réel avant de coder</li>
+          <li>Concevoir l'architecture numérique adaptée au contexte local</li>
+          <li>Construire des logiciels, des modèles d'IA et des systèmes déployés</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="domaines">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="section-num">02</p>
+      <h2 class="section-title">Domaines d'intervention</h2>
+      <p class="section-lede">Sans se limiter à un secteur : l'intelligence artificielle couvre bien plus que les chatbots et la génération de texte.</p>
+    </div>
+    <div class="domain-grid">
+      <div class="domain-card">
+        <span class="idx">01 — IA &amp; Machine Learning</span>
+        <h3>Modèles et systèmes intelligents</h3>
+        <ul>
+          <li>NLP, vision par ordinateur, traitement de la parole</li>
+          <li>Modèles prédictifs, classification, détection d'anomalies</li>
+          <li>IA embarquée et systèmes fonctionnant hors ligne</li>
+          <li>Agents et systèmes intelligents</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <span class="idx">02 — Data Engineering &amp; Analytics</span>
+        <h3>Données et prédiction</h3>
+        <ul>
+          <li>Pipelines de collecte et de traitement de données</li>
+          <li>Modèles statistiques et de prévision</li>
+          <li>Tableaux de bord et systèmes d'analyse</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <span class="idx">03 — Software Engineering</span>
+        <h3>Logiciels et systèmes</h3>
+        <ul>
+          <li>Logiciels métier, APIs, backend</li>
+          <li>Applications desktop, mobiles et web</li>
+          <li>Systèmes distribués</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <span class="idx">04 — Architecture numérique</span>
+        <h3>Digitalisation de secteurs</h3>
+        <ul>
+          <li>Analyse des processus manuels existants</li>
+          <li>Conception de l'architecture numérique adaptée</li>
+          <li>Déploiement progressif des composants</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <span class="idx">05 — R&amp;D appliquée</span>
+        <h3>Prototypes et expérimentation</h3>
+        <ul>
+          <li>Preuves de concept</li>
+          <li>Expérimentation de nouvelles technologies</li>
+          <li>Recherche appliquée et optimisation</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <span class="idx">06 — Venture Building</span>
+        <h3>De l'idée à la structure</h3>
+        <ul>
+          <li>Identification de problèmes locaux concrets</li>
+          <li>Construction et test du produit auprès des premiers utilisateurs</li>
+          <li>Accompagnement vers une structure indépendante</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modele">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="section-num">03</p>
+      <h2 class="section-title">Deux façons de travailler</h2>
+      <p class="section-lede">DevLab intervient à la demande, et construit aussi ses propres projets.</p>
+    </div>
+    <div class="model-grid">
+      <div class="model-card">
+        <p class="model-tag">Ingénierie sur mesure</p>
+        <h3>Un problème posé, un système livré</h3>
+        <p>Une organisation identifie un besoin concret. DevLab analyse la situation, conçoit une architecture, construit un prototype, puis développe, déploie et maintient la solution.</p>
+        <div class="flow">analyse → architecture → prototype → développement → déploiement → maintenance</div>
+      </div>
+      <div class="model-card">
+        <p class="model-tag">DevLab Ventures</p>
+        <h3>Un problème repéré, un produit construit</h3>
+        <p>DevLab identifie lui-même un problème répandu, construit une première solution, la teste auprès de premiers utilisateurs, puis l'accompagne progressivement vers une structure indépendante.</p>
+        <div class="flow">problème local → prototype → premiers utilisateurs → structure indépendante</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="laboratoire">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="section-num">04</p>
+      <h2 class="section-title">Laboratoire</h2>
+      <p class="section-lede">Une sélection de projets déjà construits — les premières briques de ce que DevLab construit.</p>
+    </div>
+    <div class="proj-list">
+      <div class="proj-row">
+        <div><span class="proj-name">CalvoNote</span><span class="proj-tag">IA · Parole · NLP</span></div>
+        <div class="proj-desc">Écosystème de transcription, traduction et synthèse vocale entre le français et le Fulfulde Adamawa : application Android, logiciel de bureau fonctionnant hors ligne, et modèles publiés.</div>
+        <a class="proj-link" href="https://github.com/bono-p" target="_blank" rel="noopener">Voir sur GitHub</a>
+      </div>
+      <div class="proj-row">
+        <div><span class="proj-name">Tardigrade</span><span class="proj-tag">Recherche · Modèles NLP</span></div>
+        <div class="proj-desc">Fine-tuning et audit scientifique d'un modèle NLLB-200 pour la traduction français–Fulfulde, étendu à la reconnaissance et à la synthèse vocale de cette langue.</div>
+        <a class="proj-link" href="https://github.com/bono-p/tardigrade" target="_blank" rel="noopener">Voir sur GitHub</a>
+      </div>
+      <div class="proj-row">
+        <div><span class="proj-name">Kitabu</span><span class="proj-tag">Plateforme · Backend</span></div>
+        <div class="proj-desc">Bibliothèque numérique francophone : backend FastAPI, base PostgreSQL, plateforme de lecture en ligne déployée.</div>
+        <a class="proj-link" href="https://pdflaire-afr.onrender.com" target="_blank" rel="noopener">Voir le site</a>
+      </div>
+      <div class="proj-row">
+        <div><span class="proj-name">format_v2</span><span class="proj-tag">Software Engineering</span></div>
+        <div class="proj-desc">Format de fichier structuré (.fmt) : module Python complet, suite de 151 tests, démonstrateur FastAPI.</div>
+        <a class="proj-link" href="https://github.com/bono-p/format_v2" target="_blank" rel="noopener">Voir sur GitHub</a>
+      </div>
+      <div class="proj-row">
+        <div><span class="proj-name">Vision par ordinateur</span><span class="proj-tag">R&amp;D · Computer Vision</span></div>
+        <div class="proj-desc">Démonstrateur combinant reconnaissance faciale, détection d'émotion et détection d'objets en temps réel.</div>
+        <span class="proj-link disabled">Démonstrateur interne</span>
+      </div>
+      <div class="proj-row">
+        <div><span class="proj-name">ClockPlanner</span><span class="proj-tag">Mobile · UX</span></div>
+        <div class="proj-desc">Application Android expérimentale : une horloge analogique interactive comme interface de planification d'événements et de tâches.</div>
+        <span class="proj-link disabled">Dépôt privé</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="manifeste">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="section-num">05</p>
+      <h2 class="section-title">Où nous en sommes</h2>
+    </div>
+    <div class="manifesto">
+      <p>L'ambition de DevLab est grande : couvrir l'intelligence artificielle sans se limiter à un domaine, concevoir l'architecture numérique de secteurs entiers, et faire émerger des structures indépendantes à partir de problèmes locaux.</p>
+      <blockquote class="pull">Une jeune structure qui commence par résoudre des problèmes techniques réels, construit des systèmes sérieux, et transforme progressivement certains projets en produits.</blockquote>
+      <p class="muted">DevLab est aujourd'hui une structure indépendante en cours de formalisation au Cameroun. Les projets présentés ici sont réels, déployés ou en cours de développement actif — ce sont les premières briques du laboratoire.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <p class="section-num">06</p>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-block">
+        <h3>Code &amp; projets</h3>
+        <a href="https://github.com/bono-p" target="_blank" rel="noopener">github.com/bono-p</a>
+      </div>
+      <div class="contact-block">
+        <h3>Porteur</h3>
+        <span>Bono Passale Franc Eugène</span>
+      </div>
+    </div>
+    <p style="color:var(--muted); font-size:0.86rem; margin-top:28px;">Adresse email de contact à venir.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap-wide">
+    <div>DevLab — Cameroun</div>
+    <div class="mono">devlab-site</div>
+  </div>
+</footer>
+
+</body>
+</html>
