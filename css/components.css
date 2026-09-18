@@ -1,0 +1,172 @@
+/* ==========================================================================
+   DevLab Africa — Composants partagés (nav, boutons, badges, cartes, footer)
+   ========================================================================== */
+
+/* ---------- Nav ---------- */
+.site-nav{
+  position:sticky; top:0; z-index:40;
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:var(--max-wide); margin:0 auto; padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.nav-brand{
+  font-family:var(--font-display); font-weight:700; font-size:1.05rem;
+  color:var(--text); text-decoration:none; letter-spacing:-0.01em;
+  display:flex; align-items:baseline; gap:2px;
+}
+.nav-brand:hover{ text-decoration:none; }
+.nav-brand .lab{ color:var(--teal); }
+
+.nav-links{ display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0; }
+.nav-links a{
+  color:var(--muted); font-size:.92rem; font-weight:500;
+  transition:color .15s ease;
+}
+.nav-links a:hover{ color:var(--text); text-decoration:none; }
+.nav-links a.active{ color:var(--text); }
+
+.nav-right{ display:flex; align-items:center; gap:14px; }
+
+.theme-toggle{
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid var(--border); background:var(--panel);
+  color:var(--muted); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; padding:0; transition:border-color .15s ease, color .15s ease;
+}
+.theme-toggle:hover{ border-color:var(--teal); color:var(--teal); }
+.theme-toggle .icon-dark{ display:none; }
+:root[data-theme="light"] .theme-toggle .icon-light{ display:none; }
+:root[data-theme="light"] .theme-toggle .icon-dark{ display:block; }
+
+.nav-toggle{
+  display:none; width:36px; height:36px; border:1px solid var(--border);
+  background:var(--panel); border-radius:var(--radius-s); color:var(--text);
+  cursor:pointer; align-items:center; justify-content:center;
+}
+
+@media (max-width: 860px){
+  .nav-links{
+    position:fixed; inset:0 0 0 auto; top:69px; width:100%; height:calc(100% - 69px);
+    background:var(--bg); flex-direction:column; align-items:flex-start;
+    padding:32px 28px; gap:6px; transform:translateX(100%);
+    transition:transform .25s ease; overflow-y:auto;
+  }
+  .nav-links.open{ transform:translateX(0); }
+  .nav-links a{ width:100%; padding:14px 0; font-size:1.05rem; border-bottom:1px solid var(--border); }
+  .nav-toggle{ display:flex; }
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 20px; border-radius:var(--radius-s);
+  font-family:var(--font-body); font-weight:600; font-size:.92rem;
+  border:1px solid transparent; cursor:pointer; transition:all .15s ease;
+  text-decoration:none; line-height:1.2;
+}
+.btn:hover{ text-decoration:none; }
+.btn-primary{ background:var(--teal); color:#0a1210; }
+.btn-primary:hover{ background:var(--teal-dim); color:#0a1210; }
+.btn-ghost{ background:transparent; color:var(--text); border-color:var(--border-strong); }
+.btn-ghost:hover{ border-color:var(--teal); color:var(--teal); }
+.btn-row{ display:flex; gap:12px; flex-wrap:wrap; }
+
+/* ---------- Status badges (lecture d'état, pas décoratif) ---------- */
+.status{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.04em;
+  padding:4px 9px; border-radius:99px; border:1px solid var(--border-strong);
+  color:var(--muted); white-space:nowrap;
+}
+.status::before{ content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.status-active{ color:var(--teal); border-color:color-mix(in srgb, var(--teal) 40%, var(--border-strong)); }
+.status-research{ color:var(--amber); border-color:color-mix(in srgb, var(--amber) 40%, var(--border-strong)); }
+.status-experiment{ color:#9aa6b2; }
+.status-prototype{ color:var(--teal); opacity:.8; }
+.status-restricted{ color:var(--muted-2); border-style:dashed; }
+.status-archived{ color:var(--muted-2); }
+
+/* ---------- Section shell ---------- */
+.section{ padding:88px 0; border-bottom:1px solid var(--border); }
+.section:last-of-type{ border-bottom:none; }
+.section-head{ max-width:640px; margin:0 0 44px; }
+.section-kicker{
+  font-family:var(--font-mono); font-size:.78rem; color:var(--muted-2);
+  margin:0 0 10px; letter-spacing:.02em;
+}
+.section h2{ font-size:clamp(1.6rem, 2.6vw, 2.1rem); }
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:var(--radius-m); padding:26px;
+}
+.card-link{ display:block; color:inherit; transition:border-color .15s ease, transform .15s ease; }
+.card-link:hover{ text-decoration:none; border-color:var(--border-strong); }
+
+/* ---------- Lab status list ---------- */
+.status-list{ display:flex; flex-direction:column; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden; }
+.status-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px 20px; border-bottom:1px solid var(--border);
+  background:var(--panel); text-decoration:none; color:var(--text);
+  transition:background .15s ease;
+}
+.status-row:last-child{ border-bottom:none; }
+.status-row:hover{ background:var(--panel-2); text-decoration:none; }
+.status-row-name{ font-family:var(--font-mono); font-size:.94rem; }
+.status-row-desc{ color:var(--muted); font-size:.86rem; display:block; margin-top:2px; }
+
+/* ---------- Domain grid (What we work on) ---------- */
+.domain-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden; }
+.domain{ background:var(--bg); padding:28px; }
+.domain h3{ font-size:1.05rem; margin-bottom:12px; }
+.domain ul{ margin:0; padding:0; list-style:none; color:var(--muted); font-size:.9rem; }
+.domain li{ padding:5px 0; border-top:1px dotted var(--border); }
+.domain li:first-child{ border-top:none; }
+@media (max-width:700px){ .domain-grid{ grid-template-columns:1fr; } }
+
+/* ---------- Footer ---------- */
+.site-footer{ padding:56px 0 40px; }
+.footer-grid{ display:flex; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+.footer-brand{ max-width:320px; }
+.footer-cols{ display:flex; gap:56px; flex-wrap:wrap; }
+.footer-col h4{ font-size:.82rem; color:var(--muted-2); font-family:var(--font-mono); font-weight:500; margin-bottom:12px; }
+.footer-col a{ display:block; color:var(--muted); font-size:.9rem; padding:4px 0; }
+.footer-col a:hover{ color:var(--text); }
+.footer-bottom{
+  margin-top:48px; padding-top:24px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  color:var(--muted-2); font-size:.82rem;
+}
+
+/* ---------- Forms ---------- */
+input, textarea, select{
+  width:100%; background:var(--panel); border:1px solid var(--border-strong);
+  color:var(--text); font-family:var(--font-body); font-size:.94rem;
+  padding:12px 14px; border-radius:var(--radius-s);
+}
+label{ display:block; font-size:.84rem; color:var(--muted); margin:0 0 6px; }
+.field{ margin-bottom:18px; }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:600px){ .field-row{ grid-template-columns:1fr; } }
+.form-note{ font-size:.82rem; color:var(--muted-2); margin-top:6px; }
+
+/* ---------- Cookie banner ---------- */
+.cookie-bar{
+  position:fixed; left:16px; right:16px; bottom:16px; z-index:60;
+  max-width:640px; margin:0 auto;
+  background:var(--panel); border:1px solid var(--border-strong);
+  border-radius:var(--radius-m); padding:20px 22px;
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
+  display:none;
+}
+.cookie-bar.show{ display:block; }
+.cookie-bar p{ font-size:.88rem; color:var(--muted); margin-bottom:14px; }
+.cookie-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.cookie-actions .btn{ padding:9px 16px; font-size:.85rem; }
