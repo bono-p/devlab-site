@@ -106,7 +106,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
             {[
               { label: "Building", items: ["CalvoNote — pipeline offline STT/TTS multilingue", "Kryptos — chiffrement AES multi-format", "Kitabu — infrastructure paiement & téléchargement"] },
-              { label: "Researching", items: ["Tardigrade — traduction français ↔ fulfulde", "MiniLLM — apprentissage en un seul passage"] },
+              { label: "Researching", items: ["Tardigrade — traduction français ↔ fulfulde", "MiniLLM — comportement de minuscules modèles de langage", "Apprentissage optimisé — classification en vision avec peu de données"] },
               { label: "Exploring", items: ["Systèmes numériques institutionnels", "Infrastructure sécurisée pour environnements contraints"] },
             ].map((col) => (
               <div key={col.label}>
@@ -182,16 +182,16 @@ export default function Home() {
           <div className="rounded-lg border border-border bg-panel p-6 sm:p-8">
             <StatusBadge status="experiment">EXPERIMENTAL</StatusBadge>
             <h3 className="mt-4 max-w-[42ch] font-display text-[1.3rem] font-semibold">
-              Can a language model learn efficiently from a single pass through its training data?
+              Can a computer vision model learn to classify efficiently from very little data?
             </h3>
             <p className="mt-4 max-w-[62ch] text-muted">
-              Dans quelle mesure un modèle peut-il apprendre efficacement lorsqu'il ne voit les données d'entraînement qu'une seule fois ? Une question posée dans le cadre du développement de MiniLLM.
+              Dans quelle mesure un système d'apprentissage optimisé peut-il produire une classification fiable en vision par ordinateur à partir d'un nombre restreint d'exemples ? Une question de recherche indépendante des systèmes de langage du laboratoire.
             </p>
             <div className="mt-6 flex flex-wrap gap-7">
               {[
-                { label: "Hypothesis", text: "Un modèle bien architecturé peut extraire l'essentiel d'un signal d'entraînement sans répétition." },
-                { label: "Status", text: "Expérimentations en cours sur MiniLLM (~23M paramètres)." },
-                { label: "Next", text: "Évaluer le comportement du tokenizer et affiner les configurations testées." },
+                { label: "Hypothesis", text: "Une architecture et une stratégie d'entraînement bien choisies peuvent réduire fortement le besoin en données étiquetées." },
+                { label: "Status", text: "Expérimentations en cours sur des modèles de classification en vision par ordinateur." },
+                { label: "Next", text: "Comparer plusieurs stratégies d'apprentissage optimisé sur des jeux de données réduits." },
               ].map((m) => (
                 <div key={m.label} className="min-w-[140px]">
                   <span className="mb-1 block font-mono text-[0.72rem] text-muted-2">{m.label}</span>
@@ -270,7 +270,7 @@ export default function Home() {
           <SectionHead kicker="RESEARCH NOTES" title="Dernières notes" />
           <div className="flex flex-col">
             {[
-              { kicker: "RESEARCH NOTE 001", title: "Can a language model learn efficiently in a single pass?", date: "SEP 2026" },
+              { kicker: "RESEARCH NOTE 001", title: "Can a vision model classify efficiently with very little data?", date: "SEP 2026" },
               { kicker: "RESEARCH NOTE 002", title: "Building offline speech systems for underrepresented languages", date: "AOÛT 2026" },
               { kicker: "ENGINEERING NOTE 003", title: "What does it take to build a small language model from scratch?", date: "AOÛT 2026" },
             ].map((n) => (
